@@ -1179,6 +1179,52 @@ kits:
         size_gb: 0.7
     setup_minutes: 8
     composable: true
+  - name: qwen_image_2_1_bf16
+    path: qwen_image_2_1_bf16/
+    status: starter
+    tasks: [text_to_image, image_edit]
+    outputs: [image]
+    gpu:
+      minimum: A100
+      recommended: A100
+    summary: Non-quantized Qwen-Image 2.1 BF16 generator, BF16 Qwen3-VL encoder and BF16 VAE. A100 40GB/80GB only; high system RAM required. Colab E2E pending.
+    setup_file: 01_setup.py
+    launcher_file: 02_start_comfyui.py
+    aliases: [qwen_image_21_bf16, qwen-image-2.1-bf16, Qwen Image 2.1 BF16, Qwen Image 2.1 non quantized]
+    tags: [image, image_edit, rgba, bf16, non_quantized, a100]
+    workflows:
+      - name: qwen_image_2_1_bf16_t2i
+        file: qwen_image_2_1_bf16_t2i.json
+        task: text_to_image
+        speed: unknown
+        quality: high
+        notes: Start with 1024x1024, batch 1. Full BF16; no quantized prompt enhancer.
+      - name: qwen_image_2_1_bf16_edit
+        file: qwen_image_2_1_bf16_edit.json
+        task: image_edit
+        speed: unknown
+        quality: high
+        notes: Single source image. Lossless KV cache in CPU RAM; A100 E2E pending.
+      - name: qwen_image_2_1_bf16_edit_2ref
+        file: qwen_image_2_1_bf16_edit_2ref.json
+        task: image_edit
+        speed: unknown
+        quality: high
+        notes: Source plus reference image. Lossless KV cache in CPU RAM; A100 E2E pending.
+    license_notes:
+      - Qwen Research License; research/evaluation use. Review the upstream model terms.
+    assets:
+      - file: qwen_image_2.1_bf16.safetensors
+        dir: models/diffusion_models
+        size_gb: 14.230280616
+      - file: qwen3vl_8b_bf16.safetensors
+        dir: models/text_encoders
+        size_gb: 17.534334616
+      - file: qwen_image_2.1_vae_bf16.safetensors
+        dir: models/vae
+        size_gb: 0.675509688
+    setup_minutes: 15
+    composable: false
   - name: qwen_image_2_1_gguf_uc
     path: qwen_image_2_1_gguf_uc/
     status: verified

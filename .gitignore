@@ -1,6 +1,10 @@
 # Dependencies
 node_modules/
 
+# Python kit validation
+__pycache__/
+*.py[cod]
+
 # Build output
 dist/
 

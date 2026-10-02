@@ -8,8 +8,8 @@ in `.mcp.json` at the repo root.
 
 ## Per-model starter kits
 
-The machine-readable catalog currently contains **49 kits**: 34 verified,
-8 partial, and 7 starter kits. The per-workflow notes below preserve more
+The machine-readable catalog currently contains **50 kits**: 34 verified,
+8 partial, and 8 starter kits. The per-workflow notes below preserve more
 specific verification details where a kit contains multiple variants.
 
 | Kit | Status | GPU | Notes |
@@ -29,6 +29,7 @@ specific verification details where a kit contains multiple variants.
 | [`./ming_image/`](./ming_image/) | Partial | A100 40GB, high RAM | Ming-Image-0.1-Design INT8, opaque 1024/2048 Colab E2E passed; 2048 cutout passed, 1024 alpha checks failed; Japanese text errors (25.94 GB; ComfyUI v0.38.0 pinned; MIT) |
 | [`./qwen_image_edit/`](./qwen_image_edit/) | Starter | A100 (L4 for fp8) | Qwen-Image-Edit 2511, image editing |
 | [`./qwen_image_2_1/`](./qwen_image_2_1/) | Verified E2E (L4) | L4+ / A100 | Qwen-Image 2.1 unified text-to-image + instruction editing, native 2K and RGBA (int8 convrot default, ~17.3 GB; **ComfyUI master/nightly only**; Qwen Research License — research/evaluation use only) |
+| [`./qwen_image_2_1_bf16/`](./qwen_image_2_1_bf16/) | Starter | A100 40GB/80GB, high RAM | Non-quantized BF16 generator + encoder + VAE; ~32.44 GB; dedicated BF16 launcher; E2E pending |
 | [`./qwen_image_2_1_gguf_uc/`](./qwen_image_2_1_gguf_uc/) | Verified E2E (L4) | L4+ | Qwen-Image 2.1 UC-Q4_K_M GGUF (~14.6 GB including encoder and VAE; ComfyUI nightly + leejet/ComfyUI-GGUF; UC weight differences unverified; Qwen Research License) |
 | [`./qwen_image_2_1_gguf_base/`](./qwen_image_2_1_gguf_base/) | T2I Verified E2E (L4); edit variants starter | L4+ | Qwen-Image 2.1 base Q4_K_M GGUF (~14.6 GB including encoder and VAE; same publisher's `base` branch; select separately from UC; Qwen Research License) |
 | [`./flux1/`](./flux1/) | Verified E2E | L4+ / A100 | Flux 1 dev fp8 (Comfy-Org repack, no HF token); + character LoRA slot |

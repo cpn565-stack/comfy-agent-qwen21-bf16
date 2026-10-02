@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## This fork: Qwen Image 2.1 BF16 on A100
+
+For the owner's Qwen Image 2.1 deployment, use the
+[`qwen_image_2_1_bf16` kit](scripts/colab/qwen_image_2_1_bf16/README.md).
+It requires an actual A100 40GB/80GB runtime before setup/downloads and
+uses non-quantized BF16 generator, text encoder and VAE weights, with a
+lossless KV cache. Keep the existing working Torch/CUDA installation.
+Read the kit README for the dedicated launcher and official Colab CLI flow.
+The BF16 profile is Starter until a recorded A100 E2E run succeeds.
+
 Guidance for AI coding agents (Codex, Claude Code, and others) driving the
 `comfy-agent` CLI to generate images, video, or audio with ComfyUI.
 

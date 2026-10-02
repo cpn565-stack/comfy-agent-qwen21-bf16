@@ -481,6 +481,13 @@ export const buildColabSuggestPayload = (
   const sorted = sortCatalog(catalog);
   const goalTokens = tokenize(options.goal);
   const hints = inferGoalHints(options.goal);
+  // Full precision is a constraint: a verified INT8 kit must not replace BF16.
+  const qwen21Bf16Requested =
+    (goalContainsName(options.goal, "qwen_image_2_1") ||
+      goalContainsName(options.goal, "qwenimage21")) &&
+    /\b(?:bf16|bfloat16|unquantized)\b|\bnon quantized\b|\bfull precision\b|非量化|未量化/.test(
+      normalizeName(options.goal),
+    );
   const requestedGpu = normalizeColabGpu(options.gpu) ?? hints.requestedGpu;
   const primaryOutput = options.output ?? inferPrimaryOutput(hints);
   const limit = Math.max(1, Math.floor(options.limit ?? 5));
@@ -494,6 +501,7 @@ export const buildColabSuggestPayload = (
   const suggestions: ColabSuggestion[] = [];
   const alternativeCandidates: ColabSuggestion[] = [];
   for (const kit of sorted.kits) {
+    if (qwen21Bf16Requested && kit.name !== "qwen_image_2_1_bf16") continue;
     for (const workflow of kit.workflows) {
       if (
         (H3_EXTENSION_WORKFLOWS.has(workflow.name) || H3_TURBO_WORKFLOWS.has(workflow.name)) &&
@@ -607,7 +615,11 @@ export const buildColabSuggestPayload = (
         }
       }
       if (requestedGpu) {
-        if (isGpuCompatible(kit.gpu.minimum, requestedGpu)) {
+        const gpuCompatible =
+          kit.name === "qwen_image_2_1_bf16"
+            ? requestedGpu === "A100"
+            : isGpuCompatible(kit.gpu.minimum, requestedGpu);
+        if (gpuCompatible) {
           reasons.push(`gpu:${requestedGpu}`);
           if (kit.gpu.verified) {
             reasons.push(

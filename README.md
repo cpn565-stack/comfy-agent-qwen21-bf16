@@ -1,5 +1,9 @@
 # Comfy Agent
 
+This fork adds **Qwen Image 2.1 on A100 with non-quantized BF16 weights**.
+See the [BF16 setup guide (繁體中文)](./scripts/colab/qwen_image_2_1_bf16/README.md).
+The new profile is **Starter**: local checks pass; Colab A100 E2E is pending.
+
 ![Logo](https://github.com/shinshin86/comfy-agent/raw/main/assets/comfy-agent-logo.png)
 
 [![npm version](https://img.shields.io/npm/v/comfy-agent.svg)](https://www.npmjs.com/package/comfy-agent)
@@ -29,7 +33,7 @@ agent? See [For AI agents](#for-ai-agents).
 
 ## Why comfy-agent
 
-- **Verified environment catalog** — [49 kits](./scripts/colab/README.md) expose
+- **Verified environment catalog** — [50 kits](./scripts/colab/README.md) expose
   GPU, download size, setup time, license, and E2E evidence as machine-readable data.
 - **Artifacts and instructions stay local** — presets, outputs, recipes, and jobs
   survive server resets; [`connect`](./docs/cli-reference.md#connect) absorbs volatile URLs.
@@ -88,6 +92,7 @@ comfy-agent run z_image_turbo --prompt "a cat riding a bicycle"
 | Image | [`ming_image/`](./scripts/colab/ming_image/)                               | Partial  | A100 40GB, high RAM | Ming-Image Design INT8, opaque 1024/2048 E2E passed; text/alpha limitations |
 | Image | [`qwen_image_edit/`](./scripts/colab/qwen_image_edit/)                     | Starter  | L4          | Qwen-Image-Edit instruction-based editing             |
 | Image | [`qwen_image_2_1/`](./scripts/colab/qwen_image_2_1/)                       | Verified | L4          | Qwen-Image 2.1 text-to-image + editing (nightly)      |
+| Image | [`qwen_image_2_1_bf16/`](./scripts/colab/qwen_image_2_1_bf16/) | Starter | A100 40GB/80GB | Non-quantized BF16 generation + editing; high RAM; E2E pending |
 | Image | [`qwen_image_2_1_gguf_uc/`](./scripts/colab/qwen_image_2_1_gguf_uc/)          | Verified | L4          | Qwen-Image 2.1 UC-Q4_K_M GGUF (UC claim unverified)   |
 | Image | [`qwen_image_2_1_gguf_base/`](./scripts/colab/qwen_image_2_1_gguf_base/)   | Partial  | L4          | Qwen-Image 2.1 base Q4_K_M GGUF (T2I verified)        |
 | Image | [`boogu/`](./scripts/colab/boogu/)                                         | Verified | L4          | Boogu-Image Turbo text-to-image                       |
